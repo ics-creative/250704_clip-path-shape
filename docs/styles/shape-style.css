@@ -1,0 +1,183 @@
+.demo-section {
+  margin-bottom: 48px;
+}
+.demo-item {
+  margin-bottom: 120px;
+}
+.demo-item h3 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: #222222;
+}
+.demo-content {
+  padding: 24px 0;
+  min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===============================================
+   作例1：角丸の吹き出し
+   =============================================== */
+.speech-bubble {
+  padding: 24px;
+  width: 320px;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+  text-align: center;
+  clip-path: shape(
+    from 10% 0,
+    line to 90% 0,
+    arc to 100% 10% of 10px,
+    line to 100% 90%,
+    arc to 90% 100% of 10px,
+    line to 10% 100%,
+    arc to 0 90% of 10px,
+    line to 0 10%,
+    arc to 10% 0 of 10px,
+    close
+  );
+}
+
+/* ===============================================
+   作例2：波形クリッピング
+   =============================================== */
+.wavy-box {
+  width: 100%;
+  max-width: 500px;
+  height: 250px;
+  background: url("https://picsum.photos/500/250?random=1") no-repeat center
+    center;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 20px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  clip-path: shape(
+    from 0 50%,
+    smooth to 25% 40% with 12.5% 80%,
+    smooth to 50% 60% with 37.5% 0,
+    smooth to 75% 50% with 62.5% 100%,
+    smooth to 100% 40% with 87.5% 20%,
+    line to 100% 100%,
+    line to 0 100%,
+    close
+  );
+}
+
+/* ===============================================
+   作例3：有機的な形のホバーエフェクト付きカード
+   =============================================== */
+.organic-card {
+  width: 350px;
+  height: 250px;
+  background: linear-gradient(
+    45deg,
+    var(--success-color),
+    var(--primary-color)
+  );
+  color: white;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  clip-path: shape(
+    from 0 20%,
+    smooth to 50% 0 with 25% 10%,
+    smooth to 100% 20% with 75% 10%,
+    line to 100% 80%,
+    smooth to 50% 100% with 75% 90%,
+    smooth to 0 80% with 25% 90%,
+    close
+  );
+  transition: clip-path 0.5s ease-in-out;
+  cursor: pointer;
+}
+.organic-card:hover {
+  clip-path: shape(
+    from 0 30%,
+    smooth to 50% 0 with 20% 40%,
+    smooth to 100% 30% with 80% -20%,
+    line to 100% 70%,
+    smooth to 50% 100% with 80% 60%,
+    smooth to 0 70% with 20% 120%,
+    close
+  );
+}
+.organic-card h4 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+/* ===============================================
+   作例4：マウス追従スポットライト効果
+   =============================================== */
+.spotlight-container {
+  width: 100%;
+}
+.spotlight-image {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spotlight-radius: 100px;
+  width: 100%;
+  height: 300px;
+  background-image: url("https://picsum.photos/600/300?random=2");
+  background-size: cover;
+  background-color: #333;
+  position: relative;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: crosshair;
+  border-radius: 8px;
+  clip-path: shape(
+    from calc(var(--mouse-x) - var(--spotlight-radius)) var(--mouse-y),
+    arc to calc(var(--mouse-x) + var(--spotlight-radius)) var(--mouse-y) of
+      var(--spotlight-radius),
+    arc to calc(var(--mouse-x) - var(--spotlight-radius)) var(--mouse-y) of
+      var(--spotlight-radius),
+    close
+  );
+}
+.spotlight-image p {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 16px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .demo-item h3 {
+    font-size: 20px;
+  }
+  .demo-content {
+    min-height: 200px;
+  }
+}
+
+@supports not (clip-path: shape(from 0 0, close)) {
+  .speech-bubble,
+  .wavy-box,
+  .organic-card,
+  .spotlight-image {
+    clip-path: none !important;
+    border-radius: 16px;
+  }
+  .spotlight-image {
+    clip-path: inset(0) !important;
+  }
+}
