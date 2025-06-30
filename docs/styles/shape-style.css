@@ -1,29 +1,39 @@
-.demo-section {
-  margin-bottom: 48px;
+@property --y-progress {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
 }
-.demo-item {
-  margin-bottom: 120px;
+
+@property --c-progress {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
 }
-.demo-item h3 {
+
+.item {
+  margin-bottom: 160px;
+}
+.item__title {
   font-size: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 36px;
   color: #222222;
 }
-.demo-content {
+.item__content {
   padding: 24px 0;
   min-height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 /* ===============================================
-   作例1：角丸の吹き出し
+   作例1：タイトル装飾
    =============================================== */
-.speech-bubble {
-  padding: 24px;
-  width: 320px;
-  min-height: 160px;
+.title-decoration {
+  padding: 20px 12px;
+  width: 80%;
+  height: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,28 +45,30 @@
   color: white;
   text-align: center;
   clip-path: shape(
-    from 10% 0,
-    line to 90% 0,
-    arc to 100% 10% of 10px,
-    line to 100% 90%,
-    arc to 90% 100% of 10px,
-    line to 10% 100%,
-    arc to 0 90% of 10px,
-    line to 0 10%,
-    arc to 10% 0 of 10px,
+    from 12px 0,
+    line to calc(100% - 12px) 0,
+    arc to 100% 12px of 12px,
+    line to 100% calc(100% - 12px),
+    arc to calc(100% - 12px) 100% of 12px,
+    line to 12px 100%,
+    arc to 0 calc(100% - 12px) of 12px,
+    line to 0 12px,
+    arc to 12px 0 of 12px,
     close
   );
+  > h4 {
+    font-size: 24px;
+  }
 }
 
 /* ===============================================
    作例2：波形クリッピング
    =============================================== */
-.wavy-box {
-  width: 100%;
-  max-width: 500px;
+.wave-clip {
+  width: 80%;
+  max-width: none;
   height: 250px;
-  background: url("https://picsum.photos/500/250?random=1") no-repeat center
-    center;
+  background: url("../images/sea.jpg") no-repeat center center;
   background-size: cover;
   display: flex;
   align-items: flex-end;
@@ -65,11 +77,17 @@
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   clip-path: shape(
-    from 0 50%,
-    smooth to 25% 40% with 12.5% 80%,
-    smooth to 50% 60% with 37.5% 0,
-    smooth to 75% 50% with 62.5% 100%,
-    smooth to 100% 40% with 87.5% 20%,
+    from 0 20%,
+    /* 中波 */ smooth to 10% 12% with 5% 16%,
+    /* 小波 */ smooth to 20% 18% with 15% 15%,
+    /* 中波 */ smooth to 30% 10% with 25% 14%,
+    /* 小波 */ smooth to 40% 16% with 35% 13%,
+    /* 中波 */ smooth to 50% 8% with 45% 12%,
+    /* 小波 */ smooth to 60% 14% with 55% 11%,
+    /* 中波 */ smooth to 70% 6% with 65% 10%,
+    /* 小波 */ smooth to 80% 12% with 75% 9%,
+    /* 中波 */ smooth to 90% 4% with 85% 8%,
+    /* 小波 */ smooth to 100% 10% with 95% 7%,
     line to 100% 100%,
     line to 0 100%,
     close
@@ -77,61 +95,72 @@
 }
 
 /* ===============================================
-   作例3：有機的な形のホバーエフェクト付きカード
+   作例3：アニメーション
    =============================================== */
-.organic-card {
-  width: 350px;
-  height: 250px;
-  background: linear-gradient(
-    45deg,
-    var(--success-color),
-    var(--primary-color)
-  );
+.text-clip {
+  width: 80%;
+  max-width: none;
+  background: var(--primary-color);
   color: white;
-  padding: 40px;
+  padding: 64px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
+  z-index: 2;
   clip-path: shape(
-    from 0 20%,
-    smooth to 50% 0 with 25% 10%,
-    smooth to 100% 20% with 75% 10%,
-    line to 100% 80%,
-    smooth to 50% 100% with 75% 90%,
-    smooth to 0 80% with 25% 90%,
+    from 0 100%,
+    line to 0 calc(100% - var(--y-progress)),
+    curve to 100% calc(100% - var(--y-progress)) with 60%
+      calc(100% - var(--c-progress)),
+    line to 100% calc(100% - var(--y-progress)),
+    line to 100% 100%,
     close
   );
-  transition: clip-path 0.5s ease-in-out;
-  cursor: pointer;
+  line-height: 2;
+  animation: animateY 3s var(--easeInQuart) infinite 1s,
+    animateC 3s var(--easeOutQuart) infinite 1s;
+  > h4 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
 }
-.organic-card:hover {
+
+.text-clip-background {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: calc(100% - 48px);
+  background: var(--success-color);
+  z-index: 1;
   clip-path: shape(
-    from 0 30%,
-    smooth to 50% 0 with 20% 40%,
-    smooth to 100% 30% with 80% -20%,
-    line to 100% 70%,
-    smooth to 50% 100% with 80% 60%,
-    smooth to 0 70% with 20% 120%,
+    from 0 100%,
+    line to 0 calc(100% - var(--y-progress)),
+    curve to 100% calc(100% - var(--y-progress)) with 40%
+      calc(100% - var(--c-progress)),
+    line to 100% calc(100% - var(--y-progress)),
+    line to 100% 100%,
     close
   );
-}
-.organic-card h4 {
-  font-size: 24px;
-  margin-bottom: 16px;
+  animation: animateY 3s var(--easeInQuart) infinite 0.7s,
+    animateC 3s var(--easeOutQuart) infinite 0.7s;
 }
 
 /* ===============================================
-   作例4：マウス追従スポットライト効果
+   作例4：マウス追従星型スポットライト効果
    =============================================== */
-.spotlight-container {
+.spotlight {
   width: 100%;
 }
-.spotlight-image {
+.spotlight__image {
   --mouse-x: 50%;
   --mouse-y: 50%;
-  --spotlight-radius: 100px;
+  --spotlight-radius: 135px;
+  --inner-radius: 55px;
   width: 100%;
   height: 300px;
   background-image: url("https://picsum.photos/600/300?random=2");
@@ -145,11 +174,31 @@
   cursor: crosshair;
   border-radius: 8px;
   clip-path: shape(
-    from calc(var(--mouse-x) - var(--spotlight-radius)) var(--mouse-y),
-    arc to calc(var(--mouse-x) + var(--spotlight-radius)) var(--mouse-y) of
-      var(--spotlight-radius),
-    arc to calc(var(--mouse-x) - var(--spotlight-radius)) var(--mouse-y) of
-      var(--spotlight-radius),
+    /* 星型の5つの外側頂点と5つの内側頂点を定義 */
+      /* 上部の頂点から時計回りに描画 */ from var(--mouse-x)
+      calc(var(--mouse-y) - var(--spotlight-radius)),
+    /* 右上内側 */ line to calc(var(--mouse-x) + var(--inner-radius) * 0.588)
+      calc(var(--mouse-y) - var(--inner-radius) * 0.809),
+    /* 右上外側 */ line to
+      calc(var(--mouse-x) + var(--spotlight-radius) * 0.951)
+      calc(var(--mouse-y) - var(--spotlight-radius) * 0.309),
+    /* 右内側 */ line to calc(var(--mouse-x) + var(--inner-radius) * 0.951)
+      calc(var(--mouse-y) + var(--inner-radius) * 0.309),
+    /* 右下外側 */ line to
+      calc(var(--mouse-x) + var(--spotlight-radius) * 0.588)
+      calc(var(--mouse-y) + var(--spotlight-radius) * 0.809),
+    /* 下内側 */ line to var(--mouse-x)
+      calc(var(--mouse-y) + var(--inner-radius)),
+    /* 左下外側 */ line to
+      calc(var(--mouse-x) - var(--spotlight-radius) * 0.588)
+      calc(var(--mouse-y) + var(--spotlight-radius) * 0.809),
+    /* 左内側 */ line to calc(var(--mouse-x) - var(--inner-radius) * 0.951)
+      calc(var(--mouse-y) + var(--inner-radius) * 0.309),
+    /* 左上外側 */ line to
+      calc(var(--mouse-x) - var(--spotlight-radius) * 0.951)
+      calc(var(--mouse-y) - var(--spotlight-radius) * 0.309),
+    /* 左上内側 */ line to calc(var(--mouse-x) - var(--inner-radius) * 0.588)
+      calc(var(--mouse-y) - var(--inner-radius) * 0.809),
     close
   );
 }
@@ -161,23 +210,47 @@
 }
 
 @media (max-width: 768px) {
-  .demo-item h3 {
+  .item__title {
     font-size: 20px;
   }
-  .demo-content {
+  .item__content {
     min-height: 200px;
   }
 }
 
 @supports not (clip-path: shape(from 0 0, close)) {
-  .speech-bubble,
-  .wavy-box,
-  .organic-card,
-  .spotlight-image {
+  .title-decoration,
+  .wave-clip,
+  .text-clip,
+  .spotlight__image {
     clip-path: none !important;
     border-radius: 16px;
   }
-  .spotlight-image {
+  .spotlight__image {
     clip-path: inset(0) !important;
+  }
+}
+
+@keyframes animateY {
+  0% {
+    --y-progress: 0%;
+  }
+  60% {
+    --y-progress: 100%;
+  }
+  100% {
+    --y-progress: 100%;
+  }
+}
+
+@keyframes animateC {
+  0% {
+    --c-progress: 0%;
+  }
+  60% {
+    --c-progress: 200%;
+  }
+  100% {
+    --c-progress: 200%;
   }
 }

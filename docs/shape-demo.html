@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>CSS shape() 関数 高度なデモ | ICS</title>
-	<link rel="stylesheet" href="styles/base.css">
-	<link rel="stylesheet" href="styles/shape-style.css">
-</head>
-<body>
-	<main class="main">
-		<section class="demo-section">
-			<div class="container">
-				
-				<!-- 作例1：パズルのピースのような形 -->
-				<div class="demo-item">
-					<h3>1. パズルのピースのような形</h3>
-					<div class="demo-content">
-						<div class="speech-bubble">
-							<p>lineとarcの組み合わせで、パズルのピースのような形を作れます。</p>
-						</div>
-					</div>
-				</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shape()のデモ</title>
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/shape-style.css" />
+  </head>
+  <body>
+    <main class="main">
+      <section class="section">
+        <div class="container">
+          <!-- 作例1：タイトル装飾 -->
+          <div class="item">
+            <h3 class="item__title">1. タイトル装飾</h3>
+            <div class="item__content">
+              <div class="title-decoration">
+                <h4>lineとarcの組み合わせ</h4>
+              </div>
+            </div>
+          </div>
 
-				<!-- 作例2：波形クリッピング -->
-				<div class="demo-item">
-					<h3>2. 波形クリッピング</h3>
-					<div class="demo-content">
-						<div class="wavy-box">
-							<p>smooth toを使えば、滑らかな曲線を描くことができます。</p>
-						</div>
-					</div>
-				</div>
+          <!-- 作例2：波形クリッピング -->
+          <div class="item">
+            <h3 class="item__title">2. 波形クリッピング</h3>
+            <div class="item__content">
+              <div class="wave-clip"></div>
+            </div>
+          </div>
 
-				<!-- 作例3：有機的な形のホバーエフェクト付きカード -->
-				<div class="demo-item">
-					<h3>3. 有機的な形のホバーエフェクト付きカード</h3>
-					<div class="demo-content">
-						<div class="organic-card">
-							<h4>Hover Me</h4>
-							<p>ホバーすると形状が滑らかに変化します。transitionと組み合わせることで、インタラクティブな表現が可能です。</p>
-						</div>
-					</div>
-				</div>
+          <!-- 作例3：アニメーション -->
+          <div class="item">
+            <h3 class="item__title">3. アニメーション</h3>
+            <div class="item__content">
+              <div class="text-clip-background"></div>
+              <div class="text-clip">
+                <h4>テキストのタイトル</h4>
+                <p>
+                  アニメーションと組み合わせることもできます。<br />
+                  clip-pathのshape()関数はCSSの@propertyを使用したアニメーションとも相性が良いです。<br />
+                  JavaScriptに頼らずCSSだけで実現できるため、パフォーマンスの観点からも有効です。
+                </p>
+              </div>
+            </div>
+          </div>
 
-				<!-- 作例4：マウス追従スポットライト効果 -->
-				<div class="demo-item">
-					<h3>4. マウス追従スポットライト効果 (JavaScript連携)</h3>
-					<div class="demo-content spotlight-container">
-						<div class="spotlight-image">
-							<p>このエリアでマウスを動かしてみてください</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</section>
-	</main>
-	<script src="scripts/shape-script.js"></script>
-</body>
-</html> 
+          <!-- 作例4：マウス追従星型スポットライト効果 -->
+          <div class="item">
+            <h3 class="item__title">
+              4. マウス追従星型スポットライト効果 (JavaScript連携)
+            </h3>
+            <div class="item__content spotlight">
+              <div class="spotlight__image">
+                <p>このエリアでマウスを動かしてみてください</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="scripts/shape-script.js"></script>
+  </body>
+</html>
