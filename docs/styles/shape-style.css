@@ -129,11 +129,8 @@
 
 .text-clip-background {
   position: absolute;
-  top: 24px;
-  left: 50%;
-  transform: translateX(-50%);
   width: 80%;
-  height: calc(100% - 48px);
+  height: 100%;
   background: var(--success-color);
   z-index: 1;
   clip-path: shape(

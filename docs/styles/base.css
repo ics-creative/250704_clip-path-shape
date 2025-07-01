@@ -34,14 +34,10 @@ body {
   font-size: 18px;
 }
 
-.section {
+.main {
+  padding: 64px 20px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
-}
-
-.main {
-  padding: 64px 0;
 }
 
 @media (max-width: 768px) {
