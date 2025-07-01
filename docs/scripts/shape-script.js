@@ -1,5 +1,5 @@
 // スポットライト効果
-const spotlightImage = document.querySelector(".spotlight__image");
+const spotlightImage = document.querySelector(".js-spotlight");
 
 if (spotlightImage) {
   // マウスが要素上を移動したときの処理
