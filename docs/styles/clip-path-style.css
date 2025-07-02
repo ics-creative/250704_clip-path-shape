@@ -29,7 +29,7 @@
   overflow: hidden;
 }
 
-/* デフォルト（斜め） */
+/* バリエーション1（斜め） */
 .card-image {
   background: linear-gradient(
     135deg,
